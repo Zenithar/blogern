@@ -1,0 +1,11 @@
+name = "Blogern"
+license = "MIT"
+licenselink = "https://github.com/.../.../LICENSE.md"
+description = ""
+homepage = "http://blog.zenithar.org/"
+tags = ["", ""]
+features = ["", ""]
+
+[author]
+  name = "Thibault NORMAND"
+  homepage = "https://zenithar.org"

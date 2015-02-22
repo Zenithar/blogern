@@ -1,0 +1,22 @@
+{
+  "name": "hugo-theme-blogern",
+  "version": "1.0.0",
+  "authors": [
+    "Thibault NORMAND <me@zenithar.org>"
+  ],
+  "description": "Hugo blog theme",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.3",
+    "fontawesome": "~4.3.0",
+    "animate-sass": "~0.6.3",
+    "wow": "~1.0.3"
+  }
+}

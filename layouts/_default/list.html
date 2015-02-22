@@ -1,0 +1,12 @@
+{{ $baseurl := .Site.BaseUrl }}
+{{ $color := .Date.Format "02" | colorize16 }}
+          <div class="item text post">
+            <div class="container col-xs-12 col-sm-12 col-lg-12 col-md-12" style="border-left: 10px solid {{ $color }};">
+              <h1 class="title"><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
+              <div class="categories">
+                {{ range .Params.tags }}
+                  <a href="{{ $baseurl }}/tags/{{ . | urlize }}" data-pjax>{{ . }}</a>
+                {{ end }}
+              </div>
+            </div>
+          </div>
