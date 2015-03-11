@@ -1,13 +1,32 @@
 <script type="text/javascript" src="/js/vendor.js"></script>
 
 <script>
-// ANIMATE WHILE SCROLL
-var wow = new WOW({
-    boxClass: 'wow',
-    animateClass: 'animated',
-    offset: 0,
-    mobile: true,
-    live: true
-})
-wow.init();
+jQuery(document).ready(function($) {
+  var container = document.querySelector('.masonry');
+
+  //INFINITE SCROLLING
+	var $container = $('.masonry');
+  $(function(){
+		$container.infinitescroll({
+			navSelector  : 'nav',
+			nextSelector : 'nav a.next',
+			itemSelector : '.item',
+			loading: {
+				loadingText: 'Loading',
+				finishedMsg: 'Done Loading',
+				img: ''
+			}
+		},
+
+		function( newElements ) {
+      var $newElems = $( newElements ).css({ opacity: 0 });
+
+      $newElems.imagesLoaded(function() {
+				$newElems.css({ opacity: 1 });
+        salvattore['append_elements'](container, $newElems);
+			});
+
+		});
+	});
+});
 </script>

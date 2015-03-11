@@ -24,48 +24,44 @@
     <meta property="profile:last_name" content="{{ .Site.Author.LastName }}" />
     <meta property="profile:gender" content="{{ .Site.Author.Gender }}" />
     <meta property="profile:username" content="{{ .Site.Author.UserName }}" />
-
 {{ partial "header.html" . }}
+{{ $paginator := .Paginate (.Data.Pages) }}
+    {{ if $paginator.HasPrev }}<link rel="prev" href="{{ $paginator.Prev.Url }}" />{{ end }}
+    {{ if $paginator.HasNext }}<link rel="next" href="{{ $paginator.Next.Url }}" />{{ end }}
   </head>
 
   <body>
 
-    <div class="relative">
-      <a id="simple-menu" href="#sidr">
-          <div class="menu-toogle"><i class="fa fa-plus"></i>
-              <p>Menu</p>
-          </div>
-      </a>
-      <aside class="col-xs-12 col-sm-6 col-md-4 col-lg-4" style="background: url(https://blog.zenithar.org/images/cover.jpg) no-repeat center; background-size: cover;">
-          <div class="blog-info">
-              <h1>{{ .Site.Title }}</h1>
-              <p>{{ .Site.Params.Subtitle }}</p>
-          </div>
-      </aside>
-    </div>
-
-    <div class="fadeInUpRight animated">
-
-      <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12 col-lg-offset-4 col-sm-offset-6 col-md-offset-4 col-xs-offset-0" id="blog">
-
-{{ partial "social.html" . }}
-
-        <div class="masonry" data-columns>
-{{ range first 10 .Data.Pages }}{{ .Render "list"}}{{ end }}
+    <aside>
+        <div class="blog-info">
+            <h1>{{ .Site.Title }}</h1>
+            <p>{{ .Site.Params.Subtitle }}</p>
         </div>
+    </aside>
 
-        <nav class="col-xs-12 col-sm-12 col-md-12 col-lg-12 fadeInUp wow">
-          <ul class="pager">
-      			<li>
-      			    <p class="page-number">Page 1 of 2</p>
-      			</li>
-      			<li class="next"><a href="/page/2/"><i class="fa fa-chevron-right"></i></a>
-      			</li>
-      	  </ul>
-        </nav>
+    <main id="container" role="main" class="container-fluid">
+      <div class="fadeInUpRight animated">
+
+          <div class="masonry" data-columns>
+            {{ range $paginator.Pages }}
+            <div class="item text">
+              {{ .Render "li"}}
+            </div>
+            {{ end }}
+          </div>
 
       </div>
-    </div>
+
+      <nav class="col-xs-12 col-sm-12 col-md-12 col-lg-12 fadeInUp wow">
+        <ul class="pager">
+          {{ if $paginator.HasPrev }}<li class="prev"><a href="{{ $paginator.Prev.Url }}"><i class="fa fa-chevron-left"></i></a></li>{{ end }}
+          <li>
+    			    <p class="page-number">Page {{ $paginator.PageNumber }} of {{ $paginator.TotalPages }}</p>
+    			</li>
+          {{ if $paginator.HasNext }}<li class="next"><a href="{{ $paginator.Next.Url }}"><i class="fa fa-chevron-right"></i></a></li>{{ end }}
+    	  </ul>
+      </nav>
+    </main>
 
 {{ partial "footer.html" . }}
 

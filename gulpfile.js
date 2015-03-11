@@ -41,8 +41,9 @@ gulp.task('script', function() {
     return gulp.src([
       config.bowerDir + "/jquery/dist/jquery.min.js",
       config.bowerDir + "/bootstrap-sass-official/assets/javascripts/bootstrap.min.js",
-      config.bowerDir + "/salvattore/dist/salvattore.min.js",
-      config.bowerDir + "/wow/dist/wow.min.js"
+      config.bowerDir + "/infinite-scroll/jquery.infinitescroll.min.js",
+      config.bowerDir + "/salvattore/dist/salvattore.js",
+      config.bowerDir + "/images-loaded/imagesloaded.pkgd.min.js"
     ])
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('./static/js/'));

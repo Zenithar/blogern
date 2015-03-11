@@ -1,0 +1,110 @@
+{{ $doc := . }}
+{{ $baseurl := .Site.BaseUrl }}
+<article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post">
+  <div class="post-image">
+    <div>
+      <header class="post-header">
+        <h1 itemprop="name headline" class="post-title">
+          {{ .Title }}
+        </h1>
+        <ul class="post-meta-list">
+          <li class="post-meta-item post-meta-item-date-published">
+            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHtml }}" itemprop="datePublished">
+              {{ .Date.Format "2006-01-02" }}
+            </time>
+          </li>
+          {{ if isset .Params "tags" }}
+            <li class="post-meta-item post-meta-item-tags">
+              <i class="fa fa-tags"></i>
+              {{ range .Params.tags }}
+                <a itemprop="keywords" href="{{ $baseurl }}tags/{{ . | urlize }}" data-pjax>{{ . }}</a>
+              {{ end }}
+            </li>
+          {{ end }}
+          <li class="post-meta-item post-meta-item-comments">
+            <i class="fa fa-comments"></i>
+            <a href="#disqus_thread" data-disqus-identifier="{{ .Permalink }}">Comments</a>
+          </li>
+        </ul>
+      </header>
+    </div>
+  </div>
+
+  <section class="wrapper wrapper-post">
+    <div class="wrapper-container">
+      <section class="post-container">
+        <aside class="post-side">
+          {{ with .Site.Author }}
+          <div class="post-author">
+            {{ if .Image }}
+              <a href="{{ .Website }}" class="post-author-avatar">
+                <img src="{{ .Image }}" alt="{{ .Name }}">
+              </a>
+            {{ end }}
+
+            <div class="post-author-info">
+              <a href="{{ .Website}} " class="post-author-name">
+                {{ .Name }}
+              </a>
+              <p class="post-author-bio">{{ .Bio }}</p>
+            </div>
+          </div>
+          {{ end }}
+        </aside>
+
+        <div itemprop="articleBody" class="post-body">
+          {{ .Content }}
+        </div>
+
+        <footer class="post-footer">
+          {{ with .Site.Author }}
+          <div itemprop="author" itemscope itemtype="http://schema.org/Person" class="post-author">
+            {{ if .Image }}
+              <a href="{{ .Website }}" class="post-author-avatar">
+                <img itemprop="image" src="{{ .Image }}" alt="{{ .Name }}">
+              </a>
+            {{ end }}
+            <div class="post-author-info">
+              <h4 class="post-footer-heading">Written By</h4>
+
+              <a href="{{ .Website }}" itemprop="url" class="post-author-name">
+                <span itemprop="name">{{ .Name }}</span>
+              </a>
+
+              <p itemprop="description" class="post-author-bio">{{ .Bio }}</p>
+
+              {{ if .Location}}
+                <p class="post-author-location">{{ .Location}}</p>
+              {{ end }}
+
+              {{ if .Website }}
+                <p class="post-author-website">
+                  <a href="{{ .Website }}" rel="nofollow">{{ .Website }}</a>
+                </p>
+              {{ end }}
+
+              <p class="post-info">
+                <b class="post-info-title">Published on</b>
+                <time class="post-date">{{ $doc.Date.Format "January 2, 2006" }}</time>
+              </p>
+            </div>
+          </div>
+          <div class="post-social">
+            <h4 class="post-footer-heading">Spread the word</h4>
+            <a href="#" data-action="share-twitter"><i class="fa fa-fw fa-lg fa-twitter"></i></a>
+            <a href="#" data-action="share-facebook"><i class="fa fa-fw fa-lg fa-facebook"></i></a>
+            <a href="#" data-action="share-gplus"><i class="fa fa-fw fa-lg fa-google-plus"></i></a>
+          </div>
+        {{ end }}
+        </footer>
+      </section>
+
+      {{ partial "pagination.html" . }}
+
+      <section itemprop="comment" class="post-comments">
+        <div id="disqus_thread"></div>
+      </section>
+
+    </div>
+  </section>
+</article>

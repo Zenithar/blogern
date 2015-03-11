@@ -1,0 +1,28 @@
+<article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post-item">
+  <header class="post-item-header">
+    <h1 itemprop="name" class="post-item-title">
+      <a href="{{ .Permalink }}" itemprop="url" data-pjax title="{{ .Title }}">
+        {{ .Title }}
+      </a>
+    </h1>
+  </header>
+  <section itemprop="description" class="post-item-excerpt">
+    <p>{{ .Description }}</p>
+  </section>
+  <footer class="post-item-footer">
+    <ul class="post-item-meta-list">
+      <li class="post-item-meta-item post-item-meta-item-date-published">
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" | safeHtml }}" itemprop="datePublished">
+          {{ .Date.Format "2006-01-02" }}
+        </time>
+      </li>
+      <li class="post-item-meta-item post-item-meta-item-comments">
+        <i class="fa fa-comments"></i>
+        <a href="{{ .Permalink }}#disqus_thread" data-pjax data-disqus-identifier="{{if isset .Params "disqus_identifier" }}{{ index .Params "disqus_identifier" }}{{ else }}{{ .Permalink }}{{end}}">Comments</a>
+      </li>
+      <li class="post-item-meta-item post-item-meta-item-readingtime">
+        {{ .ReadingTime }} minutes
+      </li>
+    </ul>
+  </footer>
+</article>
